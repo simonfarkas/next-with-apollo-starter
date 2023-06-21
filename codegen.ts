@@ -1,23 +1,17 @@
-import type { CodegenConfig } from '@graphql-codegen/cli'
+import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
-  schema: [
-    {
-      'lib/schema.ts': {
-        noRequire: true,
-      },
-    },
-  ],
-  documents: './pages/**/*.tsx',
+  schema: "lib/schema.ts",
   generates: {
-    './lib/gql/': {
-      preset: 'client',
-      plugins: [],
-    },
-    './lib/resolvers-types.ts': {
-      plugins: ['typescript', 'typescript-resolvers'],
+    "lib/client-types.ts": {
+      documents: "./graphql/index.ts",
+      plugins: [
+        "typescript",
+        "typescript-operations",
+        "typescript-react-apollo",
+      ],
     },
   },
-}
+};
 
-export default config
+export default config;
